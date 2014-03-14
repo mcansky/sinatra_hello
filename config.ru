@@ -1,0 +1,2 @@
+require './hello'
+run SimpleApp

@@ -1,0 +1,49 @@
+require "bundler/capistrano"
+set :bundle_flags, "--deployment --quiet --binstubs"
+set :domain, "arbousier.info"
+set :application, "sinatra_hello"
+set :deploy_to, "/home/rails/#{application}"
+set :unicorn_conf, "#{deploy_to}/current/config/unicorn.rb"
+set :unicorn_pid, "#{deploy_to}/shared/pids/unicorn.pid"
+
+
+set :user, "rails"
+set :use_sudo, false
+set :group, user
+set :runner, user
+
+set :default_environment, {
+  'PATH' => "/usr/local/rbenv/shims:/usr/local/rbenv/bin:$PATH"
+}
+
+set :scm, :git
+set :repository,  "git@github.com:mcansky/sinatra_hello.git"
+set :branch, 'master'
+set :git_shallow_clone, 1
+
+set :host, "#{user}@109.107.37.177"
+
+role :web, domain
+role :app, domain
+#role :db,  domain, :primary => true
+
+set :deploy_via, :remote_cache
+
+# Unicorn control tasks
+namespace :deploy do
+  task :symlink_config, roles: :app do
+    run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
+    run "ln -nfs #{shared_path}/config/unicorn.rb #{release_path}/config/unicorn.rb"
+  end
+
+  task :restart do
+    run "if [ -f #{unicorn_pid} ]; then kill -USR2 `cat #{unicorn_pid}`; else cd #{deploy_to}/current && bundle exec unicorn -c #{unicorn_conf} -E #{rails_env} -D; fi"
+  end
+  task :start do
+    run "cd #{deploy_to}/current && bundle exec unicorn -c #{unicorn_conf} -E #{rails_env} -D"
+  end
+  task :stop do
+    run "if [ -f #{unicorn_pid} ]; then kill -QUIT `cat #{unicorn_pid}`; fi"
+  end
+  after "deploy:restart", "deploy:symlink_config"
+end

@@ -6,10 +6,11 @@ socket_file= "#{deploy_to}/shared/unicorn.sock"
 log_file = "#{rails_root}/log/unicorn.log"
 err_log = "#{rails_root}/log/unicorn_error.log"
 old_pid = pid_file + '.oldbin'
+port = 8080
 
 timeout 30
 worker_processes 2 # increase or decrease
-listen socket_file, :backlog => 1024
+listen port, :backlog => 1024
 
 pid pid_file
 stderr_path err_log

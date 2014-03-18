@@ -3,8 +3,8 @@ deploy_to = "/home/rails/sinatra_hello"
 rails_root = "#{deploy_to}/current"
 pid_file = "#{deploy_to}/shared/pids/unicorn.pid"
 socket_file= "#{deploy_to}/shared/unicorn.sock"
-log_file = "#{deploy_to}/shared/log/unicorn.log"
-err_log = "#{deploy_to}/shared/log/unicorn_error.log"
+log_file = "#{deploy_to}/shared/logs/unicorn.log"
+err_log = "#{deploy_to}/shared/logs/unicorn_error.log"
 old_pid = pid_file + '.oldbin'
 port = 8080
 

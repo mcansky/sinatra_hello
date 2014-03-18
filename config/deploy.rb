@@ -1,6 +1,6 @@
 require "bundler/capistrano"
 set :bundle_flags, "--deployment --quiet --binstubs"
-set :domain, "arbousier.info"
+set :domain, "109.107.37.177"
 set :application, "sinatra_hello"
 set :deploy_to, "/home/rails/#{application}"
 set :unicorn_conf, "#{deploy_to}/current/config/unicorn.rb"

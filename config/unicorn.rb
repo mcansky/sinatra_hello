@@ -1,8 +1,8 @@
 # define paths and filenames
-deploy_to = "/home/rails/sinatra_hello"
+deploy_to = "/home/rails/app"
 rails_root = "#{deploy_to}/current"
 pid_file = "#{deploy_to}/shared/pids/unicorn.pid"
-socket_file= "#{deploy_to}/shared/unicorn.sock"
+socket_file= "#{deploy_to}/shared/sockets/unicorn.sock"
 log_file = "#{deploy_to}/shared/logs/unicorn.log"
 err_log = "#{deploy_to}/shared/logs/unicorn_error.log"
 old_pid = pid_file + '.oldbin'
@@ -10,7 +10,7 @@ port = 8080
 
 timeout 30
 worker_processes 2 # increase or decrease
-listen port, :backlog => 1024
+listen socket_file, :backlog => 64
 
 pid pid_file
 stderr_path err_log

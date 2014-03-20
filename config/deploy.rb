@@ -2,7 +2,7 @@ require "bundler/capistrano"
 set :bundle_flags, "--deployment --quiet --binstubs"
 set :domain, "109.107.37.177"
 set :application, "sinatra_hello"
-set :deploy_to, "/home/rails/#{application}"
+set :deploy_to, "/home/rails/app"
 set :unicorn_conf, "#{deploy_to}/current/config/unicorn.rb"
 set :unicorn_pid, "#{deploy_to}/shared/pids/unicorn.pid"
 
@@ -31,6 +31,13 @@ set :deploy_via, :remote_cache
 
 # Unicorn control tasks
 namespace :deploy do
+  task :setup_config, roles: :app do
+    run "mkdir -p #{shared_path}/config"
+    run "mkdir -p #{shared_path}/pids"
+    run "mkdir -p #{shared_path}/logs"
+    run "mkdir -p #{shared_path}/sockets"
+  end
+
   task :symlink_config, roles: :app do
     run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
     run "ln -nfs #{shared_path}/config/unicorn.rb #{release_path}/config/unicorn.rb"

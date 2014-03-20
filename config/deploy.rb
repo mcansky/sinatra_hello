@@ -36,7 +36,7 @@ namespace :deploy do
     run "mkdir -p #{shared_path}/pids"
     run "mkdir -p #{shared_path}/logs"
     run "mkdir -p #{shared_path}/sockets"
-    run "mkdir -p #{shared_path}/releases"
+    run "mkdir -p #{deploy_to}/releases"
   end
 
   task :symlink_config, roles: :app do

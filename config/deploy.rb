@@ -11,6 +11,7 @@ set :user, "rails"
 set :use_sudo, false
 set :group, user
 set :runner, user
+set :rails_env, "staging"
 
 set :default_environment, {
   'PATH' => "/usr/local/rbenv/shims:/usr/local/rbenv/bin:$PATH"

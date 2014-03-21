@@ -34,7 +34,7 @@ set :deploy_via, :remote_cache
 
 # Unicorn control tasks
 namespace :deploy do
-  task :setup_config, roles: :app, :utility do
+  task :setup_config, roles: [:app, :utility] do
     run "mkdir -p #{shared_path}/config"
     run "mkdir -p #{shared_path}/pids"
     run "mkdir -p #{shared_path}/logs"
@@ -42,7 +42,7 @@ namespace :deploy do
     run "mkdir -p #{deploy_to}/releases"
   end
 
-  task :symlink_config_db, roles: :app, :utility do
+  task :symlink_config_db, roles: [:app, :utility] do
     run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
   end
 

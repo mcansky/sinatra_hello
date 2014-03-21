@@ -1,6 +1,7 @@
 require "bundler/capistrano"
 set :bundle_flags, "--deployment --quiet --binstubs"
 set :domain, "109.107.37.177"
+set :utility, "109.107.37.109"
 set :application, "sinatra_hello"
 set :deploy_to, "/home/rails/app"
 set :unicorn_conf, "#{deploy_to}/current/config/unicorn.rb"
@@ -26,13 +27,14 @@ set :host, "#{user}@109.107.37.177"
 
 role :web, domain
 role :app, domain
+role :util, utility
 #role :db,  domain, :primary => true
 
 set :deploy_via, :remote_cache
 
 # Unicorn control tasks
 namespace :deploy do
-  task :setup_config, roles: :app do
+  task :setup_config, roles: :app, :utility do
     run "mkdir -p #{shared_path}/config"
     run "mkdir -p #{shared_path}/pids"
     run "mkdir -p #{shared_path}/logs"
@@ -40,19 +42,22 @@ namespace :deploy do
     run "mkdir -p #{deploy_to}/releases"
   end
 
-  task :symlink_config, roles: :app do
+  task :symlink_config_db, roles: :app, :utility do
     run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
+  end
+
+  task :symlink_config_web, roles: :app do
     run "ln -nfs #{shared_path}/config/unicorn.rb #{release_path}/config/unicorn.rb"
   end
 
-  task :restart do
+  task :restart, roles: :app do
     run "if [ -f #{unicorn_pid} ]; then kill -USR2 `cat #{unicorn_pid}`; else cd #{deploy_to}/current && bundle exec unicorn -c #{unicorn_conf} -E #{rails_env} -D; fi"
   end
-  task :start do
+  task :start, roles: :app do
     run "cd #{deploy_to}/current && bundle exec unicorn -c #{unicorn_conf} -E #{rails_env} -D"
   end
-  task :stop do
+  task :stop, roles: :app do
     run "if [ -f #{unicorn_pid} ]; then kill -QUIT `cat #{unicorn_pid}`; fi"
   end
-  after "deploy:restart", "deploy:symlink_config"
+  after "deploy:restart", "deploy:symlink_config_web", "symlink_config_db"
 end

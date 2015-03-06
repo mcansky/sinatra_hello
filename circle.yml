@@ -1,0 +1,14 @@
+machine:
+  services:
+    - docker
+
+test:
+  override:
+    - echo "Bob"; sleep 10
+
+deployment:
+  hub:
+    branch: master
+    commands:
+      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+      - docker push mcansky/sinatra_hello

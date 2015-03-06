@@ -22,5 +22,5 @@ WORKDIR /var/app
 RUN git clone https://github.com/mcansky/sinatra_hello.git /var/app
 RUN cd /var/app; bundle install
 
-EXPOSE 3000
+EXPOSE 80
 CMD ["/usr/local/bin/foreman","start","-d","/var/app"]

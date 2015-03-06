@@ -4,7 +4,6 @@ machine:
 
 dependencies:
   pre:
-    - pip install awscli
     - docker build -t mcansky/sinatra_hello:$CIRCLE_SHA1 .
 
 test:

@@ -1,9 +1,12 @@
 machine:
+  python:
+    version: 2.7.3
   services:
     - docker
 
 dependencies:
   pre:
+    - pip install awscli
     - docker build -t mcansky/sinatra_hello:$CIRCLE_SHA1 .
 
 test:

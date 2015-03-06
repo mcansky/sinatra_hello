@@ -13,7 +13,7 @@ RUN mkdir -p /var/app
 
 # Set environment variables.
 ENV HOME /var/app
-ENV PORT 3000
+ENV PORT 80
 ENV RACK_ENV production
 
 # Define working directory.

@@ -4,7 +4,7 @@
 SHA1=$1
 
 # Deploy image to Docker Hub
-docker push circleci/hello:$SHA1
+docker push mcansky/sinatra_hello:$SHA1
 
 # Create new Elastic Beanstalk version
 EB_BUCKET=sinatra-hello-bucket

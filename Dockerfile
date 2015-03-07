@@ -1,4 +1,4 @@
-FROM mcansky/ruby_base
+FROM mcansky/base_ruby:2c7652fa95a2ab9419bb85e81a7c801ca6fa65d2
 
 # Set environment variables.
 ENV HOME /var/app

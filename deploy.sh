@@ -15,5 +15,5 @@ aws elasticbeanstalk create-application-version --application-name sinatra_hello
   --version-label $SHA1 --source-bundle S3Bucket=$EB_BUCKET,S3Key=$DOCKERRUN_FILE
 
 # Update Elastic Beanstalk environment to new version
-aws elasticbeanstalk update-environment --environment-name sinatra-hello-env \
+aws elasticbeanstalk update-environment --environment-name sinatra-hello-eb1 \
     --version-label $SHA1

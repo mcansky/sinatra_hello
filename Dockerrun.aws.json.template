@@ -5,7 +5,7 @@
     "Key": "dockercfg"
   },
   "Image": {
-    "Name": "mcansky/sinatra-hello:<TAG>",
+    "Name": "mcansky/sinatra_hello:<TAG>",
     "Update": "true"
   },
   "Ports": [

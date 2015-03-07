@@ -1,7 +1,7 @@
 {
   "AWSEBDockerrunVersion": "1",
   "Authentication": {
-    "Bucket": "sinatra-hello",
+    "Bucket": "sinatra-hello-bucket",
     "Key": "dockercfg"
   },
   "Image": {

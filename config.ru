@@ -1,2 +1,3 @@
 require './hello'
-run SimpleApp
+require 'sidekiq/web'
+run Rack::URLMap.new('/' => SimpleApp, '/sidekiq' => Sidekiq::Web)

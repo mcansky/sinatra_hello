@@ -1,0 +1,16 @@
+{
+  "AWSEBDockerrunVersion": "1",
+  "Authentication": {
+    "Bucket": "sinatra-hello",
+    "Key": "dockercfg"
+  },
+  "Image": {
+    "Name": "mcansky/sinatra-hello:<TAG>",
+    "Update": "true"
+  },
+  "Ports": [
+    {
+      "ContainerPort": "80"
+    }
+  ]
+}

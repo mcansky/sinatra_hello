@@ -1,8 +1,8 @@
 {
   "AWSEBDockerrunVersion": "1",
   "Authentication": {
-    "Bucket": "sinatra-hello-bucket",
-    "Key": "docker/dockercfg"
+    "Bucket": "elasticbeanstalk-eu-west-1-598354601320",
+    "Key": "dockercfg"
   },
   "Image": {
     "Name": "mcansky/sinatra-hello:<TAG>",

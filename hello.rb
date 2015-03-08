@@ -5,6 +5,7 @@ require './workers/test_job'
 
 Sidekiq.configure_server do |config|
   config.redis = { url: ENV['REDIS_URL'] || 'redis://localhost:6379/1' }
+  Sidekiq::Logging.logger = RemoteSyslogLogger.new('logs2.papertrailapp.com', ENV.fetch('PAPERTRAIL_PORT'), program: "sidekiq-log")
 end
 
 class MyRedis

@@ -7,7 +7,6 @@ machine:
 dependencies:
   pre:
     - pip install awscli
-    - docker build -t mcansky/sinatra_hello:$CIRCLE_SHA1 .
 
 test:
   override:
@@ -17,5 +16,9 @@ deployment:
   hub:
     branch: master
     commands:
+      - docker build -t mcansky/sinatra_hello:$CIRCLE_SHA1 .
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
       - ./deploy.sh $CIRCLE_SHA1
+      - cp Sidekiq_Dockerfile Dockerfile
+      - docker build -t mcansky/sinatra_hello_sidekiq:$CIRCLE_SHA1 .
+      - ./sidekiq_deploy.sh $CIRCLE_SHA1

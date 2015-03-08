@@ -22,7 +22,7 @@ end
 class SimpleApp < Sinatra::Base
 
   get '/' do
-    10.times { TestJob.perform_async }
+    20.times { TestJob.perform_async }
     haml "%h3 Hello THE BEANSTALK AWESOME World! #{MyRedis.value}"
   end
 

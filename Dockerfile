@@ -6,9 +6,8 @@ ENV PORT 80
 ENV RACK_ENV production
 
 # Define working directory.
-WORKDIR /var/app
+ADD . /var/app
 
-RUN git clone https://github.com/mcansky/sinatra_hello.git /var/app
 RUN cd /var/app; bundle install
 
 EXPOSE 80

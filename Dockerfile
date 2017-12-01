@@ -9,4 +9,4 @@ ADD . /var/app
 
 RUN cd /var/app; bundle install
 
-CMD ["/usr/local/bin/foreman","run", "web","-d","/var/app"]
+CMD ["./var/app/bin/http"]

@@ -1,0 +1,6 @@
+#!/bin/sh
+CONCURRENCY_LEVEL=${CONCURRENCY:-1}
+
+echo "Concurrency set to : ${CONCURRENCY_LEVEL}"
+echo ""
+bundle exec sidekiq -r ./worker.rb -c $CONCURRENCY_LEVEL

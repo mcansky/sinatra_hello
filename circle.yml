@@ -1,6 +1,8 @@
 machine:
   python:
     version: 2.7.3
+  ruby:
+    version: 2.3.5
   services:
     - docker
 

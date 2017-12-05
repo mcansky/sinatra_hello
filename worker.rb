@@ -3,7 +3,7 @@ require 'sidekiq'
 require 'redis'
 require 'sidekiq/api'
 
-$redis = Redis.new
+$redis = Redis.new(url: ENV['REDIS_URL'])
 
 class SinatraWorker
   include Sidekiq::Worker

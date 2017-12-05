@@ -4,7 +4,7 @@ require 'redis'
 require 'sidekiq/api'
 require 'haml'
 
-$redis = Redis.new
+$redis = Redis.new(url: ENV['REDIS_URL'])
 
 class SimpleApp < Sinatra::Base
 

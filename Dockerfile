@@ -10,4 +10,6 @@ ENV RACK_ENV production
 ADD . /var/app
 RUN cd /var/app; bundle install --without development test
 
-CMD ["./var/app/bin/http"]
+WORKDIR /var/app
+
+CMD ["sh /var/app/bin/http"]

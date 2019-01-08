@@ -12,4 +12,4 @@ RUN cd /var/app; bundle install --without development test
 
 WORKDIR /var/app
 
-CMD ["sh /var/app/bin/http"]
+CMD ["/bin/sh /var/app/bin/http"]

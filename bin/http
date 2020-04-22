@@ -1,3 +1,6 @@
 #!/bin/sh
-echo "the port is : ${PORT}"
-bundle exec puma -t 5:5 -p ${PORT:-8080} -e ${RACK_ENV:-development}
+
+LOCAL_PORT = ${NOMAD_PORT_HTTP:${PORT:8080}}
+
+echo "the port is : ${LOCAL_PORT}"
+bundle exec puma -t 5:5 -p ${LOCAL_PORT} -e ${RACK_ENV:-development}

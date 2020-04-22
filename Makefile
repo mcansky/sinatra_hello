@@ -1,5 +1,7 @@
 release:
 	pkgr package .
+build_docker_test:
+	docker build . -t mcansky/sinatra_hello:test
 build_docker:
 	docker build . -t mcansky/sinatra_hello:latest
 	docker tag mcansky/sinatra_hello:latest mcansky/sinatra_hello:`git rev-parse HEAD`

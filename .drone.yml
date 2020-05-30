@@ -5,7 +5,7 @@ steps:
 - name: build image
   image: ruby:2.7.1-slim
   commands:
-  - apt-get update -y && apt-get install -y curl build-essential
+  - apt-get update -y && apt-get install -y curl build-essential git
   - curl https://get.docker.io/builds/Linux/x86_64/docker-latest -o /usr/local/bin/docker
   - chmod +x /usr/local/bin/docker
   - gem install bundler:2.1.4
